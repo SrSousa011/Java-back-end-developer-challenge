@@ -1,4 +1,4 @@
-package org.lucassousa.securedoc.config;
+package com.lucassousa.securedoc.config;
 
 import io.swagger.v3.oas.models.ExternalDocumentation;
 import io.swagger.v3.oas.models.OpenAPI;

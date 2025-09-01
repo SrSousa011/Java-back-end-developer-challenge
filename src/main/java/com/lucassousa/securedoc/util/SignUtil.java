@@ -1,4 +1,4 @@
-package org.lucassousa.securedoc.util;
+package com.lucassousa.securedoc.util;
 
 import org.bouncycastle.cms.CMSSignedData;
 import org.bouncycastle.cms.CMSSignedDataGenerator;
@@ -10,6 +10,8 @@ import org.bouncycastle.cert.jcajce.JcaCertStore;
 import java.io.File;
 import java.io.FileInputStream;
 import java.io.FileOutputStream;
+import java.nio.file.Files;
+import java.nio.file.Paths;
 import java.security.KeyStore;
 import java.security.PrivateKey;
 import java.security.cert.X509Certificate;
@@ -21,7 +23,7 @@ public class SignUtil {
         String filePath = "resources/arquivos/doc.txt";
 
         KeyStore ks = KeyStore.getInstance("PKCS12");
-        ks.load(new FileInputStream(pkcs12Path), "bry123456".toCharArray());
+        ks.load(Files.newInputStream(Paths.get(pkcs12Path)), "bry123456".toCharArray());
 
         PrivateKey privateKey = (PrivateKey) ks.getKey("e2618a8b-20de-4dd2-b209-70912e3177f4", "bry123456".toCharArray());
         X509Certificate cert = (X509Certificate) ks.getCertificate("e2618a8b-20de-4dd2-b209-70912e3177f4");
@@ -34,7 +36,6 @@ public class SignUtil {
         );
         gen.addCertificates(new JcaCertStore(Collections.singletonList(cert)));
 
-        // Read file manually for Java 8
         File file = new File(filePath);
         byte[] data = new byte[(int) file.length()];
         FileInputStream fis = new FileInputStream(file);
