@@ -58,7 +58,7 @@ Este projeto implementa um sistema completo de assinatura digital conforme espec
 ## 🛠️ Tecnologias
 
 - **Java 8+** - Linguagem principal
-- **Spring Boot 3.2.0** - Framework web
+- **Spring Boot 2.7.18** - Framework web
 - **BouncyCastle 1.70** - Operações criptográficas
 - **Maven** - Gerenciamento de dependências
 - **JUnit 5** - Framework de testes
@@ -179,15 +179,15 @@ Content-Type: multipart/form-data
 **Resposta:**
 ```json
 {
+  "filename": "documento_assinado.doc.txt.p7s",
+  "signingTime": "2024-01-15 14:30:00",
   "status": "VALIDO",
-  "cryptographicValidation": true,
-  "certificateChainValidation": true,
   "infos": {
+    "fileName": "usuario_certificado.cer",
     "signerCN": "Nome do Signatário",
     "signingTime": "2024-01-15 14:30:00",
     "documentHash": "A1B2C3D4E5F6...",
     "hashAlgorithm": "SHA-512",
-    "fullSubject": "CN=Nome,O=Organização...",
     "trustChainValid": true
   }
 }
@@ -286,7 +286,8 @@ Java-back-end-developer-challenge/
 ├── target/
 ├── pom.xml
 ├── README.md
-└── RELATORIO.md
+└── Report.md
+└── Results.md
 ```
 
 ## 🔐 Segurança
@@ -312,48 +313,6 @@ Java-back-end-developer-challenge/
 - **Verificação de Assinatura**: ~30ms incluindo validação de cadeia
 - **Throughput da API**: ~100 requests/segundo
 
-## 🐛 Solução de Problemas
-
-### Problemas Comuns:
-
-#### 1. Erro de certificado não encontrado
-```
-Solução: Verificar se os arquivos estão em src/main/resources/
-```
-
-#### 2. Senha inválida do PKCS#12
-```
-Solução: Confirmar senha "bry123456" para o certificado de teste
-```
-
-#### 3. Erro de validação de cadeia
-```
-Solução: Verificar se os certificados CA estão em resources/cadeia/
-```
-
-#### 4. Arquivo muito grande
-```
-Solução: Ajustar spring.servlet.multipart.max-file-size
-```
-
-## 📈 Roadmap
-
-### Próximas Funcionalidades:
-- [ ] Suporte a múltiplos algoritmos de hash
-- [ ] Interface web para upload de arquivos
-- [ ] Integração com HSM (Hardware Security Module)
-- [ ] Suporte a timestamp digital
-- [ ] Cache de validação de certificados
-
-## 🤝 Contribuição
-
-Contribuições são bem-vindas! Para contribuir:
-
-1. Faça um fork do projeto
-2. Crie uma branch para sua feature (`git checkout -b feature/AmazingFeature`)
-3. Commit suas mudanças (`git commit -m 'Add some AmazingFeature'`)
-4. Push para a branch (`git push origin feature/AmazingFeature`)
-5. Abra um Pull Request
 
 ### Diretrizes para Contribuição:
 - Siga o padrão de código existente
